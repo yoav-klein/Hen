@@ -6,7 +6,7 @@ int main()
 
 	hen->Cluck();
 	hen->Roost();
-	hen->Delete();
+	hen->Release();
 
 	return 0;
 	

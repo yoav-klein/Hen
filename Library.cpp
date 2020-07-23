@@ -4,7 +4,10 @@
 
 struct Hen : IHen
 {
+public:
+
 	Hen()
+		: m_counter(0)
 	{
 		std::cout << "Cheep!\n" << std::endl;
 	}
@@ -21,13 +24,28 @@ struct Hen : IHen
 		std::cout << "ZZzz.." << std::endl;
 	}
 
-	void __stdcall Delete()
+	void __stdcall AddRef()
 	{
-		delete this;
+		++m_counter;
 	}
+
+	void __stdcall Release()
+	{
+		if(--m_counter == 0)
+		{
+			delete this;
+		}
+	}
+private:
+
+	unsigned int m_counter;
+
 };
 
 IHen * __stdcall CreateHen()
 {
-	return new Hen();
+	IHen* hen = new Hen();
+	hen->AddRef();
+
+	return hen;
 }

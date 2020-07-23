@@ -20,6 +20,11 @@ struct Hen : IHen
 	{
 		std::cout << "ZZzz.." << std::endl;
 	}
+
+	void __stdcall Delete()
+	{
+		delete this;
+	}
 };
 
 IHen * __stdcall CreateHen()

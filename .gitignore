@@ -1,0 +1,7 @@
+
+*
+!*.cpp
+!*.h
+!*.def
+!*.bat
+!.gitignore

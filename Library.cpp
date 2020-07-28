@@ -19,41 +19,46 @@ public:
 	}
 
 	//
-	//	IObject methods
+	//	IUnknown methods
 	//
 	
-	void __stdcall AddRef()
+	ULONG __stdcall AddRef()
 	{
 		++m_counter;
+
+		return m_counter;
 	}
 
-	void __stdcall Release()
+	ULONG __stdcall Release()
 	{
-		if(--m_counter == 0)
+		ULONG result = --m_counter;
+		if(result == 0)
 		{
 			delete this;
 		}
+
+		return result;
 	}
 
-	void* __stdcall As(const char* type)
+	HRESULT __stdcall QueryInterface(const IID& iid, void** piid)
 	{
-		if(0 == strcmp(type, "IHen")  || 
-		   0 == strcmp(type, "IHen2") ||
-		   0 == strcmp(type, "IObject"))
+		if(iid == __uuidof(IHen) || iid == __uuidof(IHen2) || iid == __uuidof(IUnknown))
 		{
-			AddRef();
-			return static_cast<IHen2*>(this);
+			*piid = static_cast<IHen2*>(this);
 		}
-		else if(0 == strcmp("IOfflineChicken", type))
+		else if(iid == __uuidof(IOfflineChicken))
 		{
-			AddRef();
-
-			return static_cast<IOfflineChicken*>(this);	
+			*piid = static_cast<IOfflineChicken*>(this);
 		}
 		else
 		{
-			return 0;
+			*piid = 0;
+			return E_NOINTERFACE;
 		}
+
+		static_cast<IUnknown*>(*piid)->AddRef();
+		
+		return S_OK;
 	}
 
 	//
@@ -98,10 +103,11 @@ private:
 
 };
 
-IHen * __stdcall CreateHen()
+HRESULT __stdcall CreateHen(IHen** ptr)
 {
 	IHen* hen = new Hen();
 	hen->AddRef();
-
-	return hen;
+	*ptr = hen;
+	
+	return S_OK;
 }

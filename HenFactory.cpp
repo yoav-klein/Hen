@@ -4,7 +4,6 @@
 HenFactory::HenFactory()
     : m_counter(0)
 {
-
 }
 
 HenFactory::~HenFactory() { }

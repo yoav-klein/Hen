@@ -1,4 +1,6 @@
-#include <windows.h>
+//#include <windows.h>
+#include "Library.h"
+
 
 
 class HenFactory : public IClassFactory
@@ -9,7 +11,7 @@ public:
 
     HRESULT __stdcall QueryInterface(const IID& iid, void** piid);
     ULONG __stdcall AddRef();
-    UNLONG __stdcall Release();
+    ULONG __stdcall Release();
 
     virtual HRESULT __stdcall CreateInstance(IUnknown* pUnknownOuter, const IID& iid,
                                              void** piid);
@@ -17,4 +19,4 @@ public:
 
 private:
     unsigned int m_counter;
-}
+};

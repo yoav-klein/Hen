@@ -4,7 +4,7 @@
 
 #include "Library.h"
 
-unsigned int g_ComObjsInUse = 0;
+
 
 Hen::Hen()
 	: m_counter(0)

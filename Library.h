@@ -2,7 +2,7 @@
 
 #include <unknwn.h>
 
-
+unsigned int g_ComObjsInUse = 0;
 
 struct __declspec(uuid("3ee8b447-596a-424b-a290-6d3df875537d")) IHen : IUnknown
 {

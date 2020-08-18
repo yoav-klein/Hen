@@ -41,11 +41,11 @@ int main()
         printf("%c", lpwszClsid[i]);
         //std::cout << lpwszClsid[i] << "/";
     }
-    LPCLSID   lpclsid;
+    CLSID   clsid;
     HRESULT hr;
     std::cout << "Here" << std::endl;
 
-    hr = CLSIDFromProgID(L"WindowsInstaller.Installer", lpclsid);
+    hr = CLSIDFromProgID(L"WindowsInstaller.Installer", &clsid);
     if(S_OK == hr)
     {
         std::cout << "Success" << std::endl;
@@ -56,7 +56,7 @@ int main()
     }
     std::cout << "Here" << std::endl;
     StringFromCLSID(
-            *lpclsid,
+            clsid,
             &lpwszClsid);
     
 
